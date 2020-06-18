@@ -1,4 +1,3 @@
-// Separado del main del ejercicio_12 por comodidad
 class ViewMainPage {
     constructor(myf) {
         this.myf = myf;

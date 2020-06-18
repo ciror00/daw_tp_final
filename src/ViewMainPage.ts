@@ -1,5 +1,6 @@
-// Separado del main del ejercicio_12 por comodidad
+/*
 
+*/
 interface DeviceInt{
     id:string;
     name:string;
