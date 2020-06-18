@@ -1,0 +1,22 @@
+version: '3'
+services:
+
+    service:
+        image:
+        hostname:
+        container_name:
+        restart: always
+        environment:
+            ENV_VAR: value
+        volumes:
+            - host_dir: container_dir
+        networks:
+            - net-web-app
+        depends_on:
+            - container_name
+        ports:
+            - "host_port:container_port"
+        
+    networks:
+        net-web-app:
+            driver: bridge
