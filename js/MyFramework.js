@@ -44,4 +44,9 @@ class MyFramework {
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify(data));
     }
+    // Añadido de otro ejercicio de la practica
+    configClick(id, listener) {
+        let b = this.getElementById(id);
+        b.addEventListener("click", listener);
+    }
 }

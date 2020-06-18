@@ -1,62 +1,25 @@
-class ViewMainPage {
-    constructor(myf) {
-        this.myf = myf;
-    }
-    showDevices(list) {
-        // cargo la lista de objetos en el DOM
-        let devicesUl = this.myf.getElementById("devicesList");
-        let items = "";
-        for (let i in list) {
-            let checkedStr = "";
-            if (list[i].state == "1")
-                checkedStr = "checked";
-            switch (list[i].type) {
-                case 0: // Lampara                     
-                    items += "<li class='collection-item avatar'> \
-                                <img src='images/lightbulb.png' alt='' class='circle'> \
-                                <span class='title'>" + list[i].name + "</span> \
-                                <p>" + list[i].description + "<br> \
-                                </p> \
-                                <a href='#!' class='secondary-content'> <div class='switch'> \
-                                                                            <label> \
-                                                                            Off \
-                                                                            <input type='checkbox' id='dev_" + list[i].id + "' " + checkedStr + "> \
-                                                                            <span class='lever'></span> \
-                                                                            On \
-                                                                            </label> \
-                                                                        </div></a> \
-                            </li>";
-                    break;
-                case 1: // Persiana                    
-                    items += "<li class='collection-item avatar'> \
-                                <img src='images/window.png' alt='' class='circle'> \
-                                <span class='title'>" + list[i].name + "</span> \
-                                <p>" + list[i].description + "<br> \
-                                </p> \
-                                <a href='#!' class='secondary-content'> <div class='switch'> \
-                                                                            <label> \
-                                                                            Off \
-                                                                            <input type='checkbox' id='dev_" + list[i].id + "' " + checkedStr + "> \
-                                                                            <span class='lever'></span> \
-                                                                            On \
-                                                                            </label> \
-                                                                        </div></a> \
-                            </li>";
-                    break;
-            }
-        }
-        devicesUl.innerHTML = items;
-    }
-    getSwitchStateById(id) {
-        let el = this.myf.getElementById(id);
-        return el.checked;
-    }
-}
+// Clase principal de la estructura
 class Main {
     handleEvent(evt) {
         let sw = this.myf.getElementByEvent(evt);
-        console.log("click en device:" + sw.id);
+        console.log("Device select:" + sw.id);
+        // Se crea una request por cada device filtrado
+        switch (sw.id) {
+            case "button-lamp":
+                this.myf.requestGET("devices?filter=0", this);
+                break;
+            case "button-blind":
+                this.myf.requestGET("devices?filter=1", this);
+                break;
+            case "button-all":
+                this.myf.requestGET("devices", this);
+                break;
+            default:
+                let data = { "id": sw.id, "state": this.view.getSwitchStateById(sw.id) };
+                this.myf.requestPOST("devices", data, this);
+        }
         let data = { "id": sw.id, "state": this.view.getSwitchStateById(sw.id) };
+        console.log("Device:" + data);
         this.myf.requestPOST("devices", data, this);
     }
     handleGETResponse(status, response) {
@@ -65,10 +28,8 @@ class Main {
             let data = JSON.parse(response);
             console.log(data);
             this.view.showDevices(data);
-            for (let i in data) {
-                let sw = this.myf.getElementById("dev_" + data[i].id);
-                sw.addEventListener("click", this);
-            }
+            for (let i in data)
+                this.myf.configClick(`dev_${data[i].id}`, this);
         }
     }
     handlePOSTResponse(status, response) {
@@ -79,9 +40,15 @@ class Main {
     main() {
         this.myf = new MyFramework();
         this.view = new ViewMainPage(this.myf);
+        // Lista de dispositovos
         this.myf.requestGET("devices", this);
+        // Se crea la regla para cada ID
+        this.myf.configClick("button-all", this);
+        this.myf.configClick("button-lamp", this);
+        this.myf.configClick("button-blind", this);
     }
 }
+// Al cargar la pantalla
 window.onload = () => {
     let obj = new Main();
     obj.main();

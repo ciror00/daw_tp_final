@@ -6,7 +6,6 @@ interface POSTResponseListener{
 }
 
 class MyFramework{
-
     /**
      * getElementById: Busca un elemento del DOM por su ID
      * @param id : String con el id a buscar
@@ -18,7 +17,6 @@ class MyFramework{
         el = document.getElementById(id);
         return el;
     }
-
 
     getElementByEvent(evt:Event):HTMLElement
     {
@@ -73,5 +71,9 @@ class MyFramework{
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify(data));
     }
-
+    // Añadido de otro ejercicio de la practica
+    configClick(id: string, listener: EventListenerObject): void {
+        let b: HTMLElement = this.getElementById(id);
+        b.addEventListener("click", listener);
+    }
 }
