@@ -1,0 +1,51 @@
+[
+   {
+      "id":1,
+      "name":"Patio",
+      "description":"Reflector delantero",
+      "state":1,
+      "type":0
+   },
+   {
+      "id":2,
+      "name":"Sala",
+      "description":"Araña principal",
+      "state":0,
+      "type":0
+   },
+   {
+      "id":3,
+      "name":"Habitacion",
+      "description":"Velador de mesa de luz",
+      "state":1,
+      "type":0
+   },
+   {
+      "id":4,
+      "name":"Puerta Ventana",
+      "description":"Ventana trasera",
+      "state":1,
+      "type":1
+   },
+   {
+      "id":5,
+      "name":"Puerta principal 2",
+      "description":"Puerta de acceso",
+      "state":0,
+      "type":1
+   },
+   {
+      "id":6,
+      "name":"Puerta trasera",
+      "description":"Puerta de acceso",
+      "state":1,
+      "type":1
+   },
+   {
+      "id":7,
+      "name":"Luz de emergencia",
+      "description":"Luz de pasillo",
+      "state":1,
+      "type":0
+   }
+]

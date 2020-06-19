@@ -1,0 +1,27 @@
+# Compilador de Typescript
+```
+cd src
+./compile_ts.sh . ../js
+docker stop /ts_compiler
+```
+# Comandos de Docker
+## Detener contenedores
+```
+docker stop $(docker ps -a -q)
+```
+
+## Listar y buscar redes
+docker network ls | grep mysql-net
+
+## Crear redes
+docker network create --driver bridge mysql-net
+
+# *Script* del posgrado
+## Correr contenedor de mysql-net
+./start_mysql.sh mysql-net "$PWD"/db
+
+# Correr contenedor de phpMyAdmin
+./run_phpadmin.sh mysql-net mysql-server 8085
+
+# Correr contenedor de Node
+./serve_node_app_net.sh "$PWD" ws/index.js 8000 mysql-net
