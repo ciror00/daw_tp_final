@@ -9,19 +9,15 @@ app.use(express.static('.')); // para servir archivos estaticos
 app.get('/devices', function(req, res, next) {
     var tipo = '';
 	/*
-		Se crea un switch con las diferentes opciones de la QUERY
+		Se crea un condicional con las diferentes opciones de la QUERY
 	*/
-    switch (req.query.filter)
-    {
-        case '0':
-            tipo = ' WHERE type=0';
-            break;
-        case '1':
-            tipo = ' WHERE type=1';
-            break;   
-        default:
-            break;
-    }
+	if(req.query.filter == '0'){
+		tipo = ' WHERE type=0';
+	}else if(req.query.filter == '1'){
+		tipo = ' WHERE type=1';
+	}else{
+		tipo = '';
+	}
 
     mysql.query('SELECT * FROM Devices ' + tipo , function (err, rta, field) {
         if (err) {
