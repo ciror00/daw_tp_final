@@ -1,7 +1,5 @@
 var PORT=3000;
 var express = require('express');
-var PORT=3000;
-var express = require('express');
 var app = express();
 var mysql = require('./mysql');
 app.use(express.json()); // para parsear application/json
