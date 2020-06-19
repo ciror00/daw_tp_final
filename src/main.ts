@@ -14,9 +14,9 @@ class Main implements GETResponseListener, EventListenerObject, POSTResponseList
     handleEvent(evt:Event):void
     {
         let sw: HTMLElement = this.myf.getElementByEvent(evt);
-        console.log("Device select:"+sw.id);
+        console.log("Click en dispositivo:"+sw.id);
         // Se crea una request por cada device filtrado
-        switch(sw.id)
+        switch(sw.id)                                           
         {
             case "button-lamp":
                 this.myf.requestGET("devices?filter=0",this);
@@ -34,16 +34,15 @@ class Main implements GETResponseListener, EventListenerObject, POSTResponseList
         }
 
         let data:object = {"id":sw.id,"state":this.view.getSwitchStateById(sw.id)};
-        console.log("Device:"+data);
         this.myf.requestPOST("devices",data,this);
     }
 
     handleGETResponse(status:number,response:string):void{
       if(status==200)
       {
-          console.log(response);
+          //console.log(response);
           let data:DeviceInt[] = JSON.parse(response);
-          console.log(data);
+          //console.log(data);
           this.view.showDevices(data);    
           
           for(let i in data)          
@@ -65,14 +64,13 @@ class Main implements GETResponseListener, EventListenerObject, POSTResponseList
       this.view = new ViewMainPage(this.myf);
       // Lista de dispositovos
       this.myf.requestGET("devices",this);
-
       // Se crea la regla para cada ID
       this.myf.configClick("button-all",this);
       this.myf.configClick("button-lamp",this);
       this.myf.configClick("button-blind",this);
     } 
 } 
-
+ 
 // Al cargar la pantalla
 window.onload = () => {
     let obj = new Main(); 

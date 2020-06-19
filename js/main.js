@@ -2,7 +2,7 @@
 class Main {
     handleEvent(evt) {
         let sw = this.myf.getElementByEvent(evt);
-        console.log("Device select:" + sw.id);
+        console.log("Click en dispositivo:" + sw.id);
         // Se crea una request por cada device filtrado
         switch (sw.id) {
             case "button-lamp":
@@ -19,14 +19,13 @@ class Main {
                 this.myf.requestPOST("devices", data, this);
         }
         let data = { "id": sw.id, "state": this.view.getSwitchStateById(sw.id) };
-        console.log("Device:" + data);
         this.myf.requestPOST("devices", data, this);
     }
     handleGETResponse(status, response) {
         if (status == 200) {
-            console.log(response);
+            //console.log(response);
             let data = JSON.parse(response);
-            console.log(data);
+            //console.log(data);
             this.view.showDevices(data);
             for (let i in data)
                 this.myf.configClick(`dev_${data[i].id}`, this);

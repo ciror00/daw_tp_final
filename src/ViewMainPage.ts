@@ -19,8 +19,8 @@ class ViewMainPage
 
     showDevices(list:DeviceInt[]):void
     {
-         // cargo la lista de objetos en el DOM
-        let devicesUl:HTMLElement = this.myf.getElementById("devicesList");
+        // cargo la lista de objetos en el DOM
+        let devicesUl:HTMLElement = this.myf.getElementById("devicesList"); // cargo la lista de objetos en el DOM
 
         let items:string="";
         for(let i in list)
@@ -31,40 +31,38 @@ class ViewMainPage
 
             switch(list[i].type)
             {
-                // Caso para luces
-                case 0:                     
+                case 0: // Luces                     
                     items+="<li class='collection-item avatar'> \
-                            <img src='images/lightbulb.png' alt='' class='circle'> \
-                            <span class='title'>"+list[i].name+"</span> \
-                            <p>"+list[i].description+"<br> \
-                            </p> \
-                            <a href='#!' class='secondary-content'> <div class='switch'> \
-                            <label> \
-                            Off \
-                            <input type='checkbox' id='dev_"+list[i].id+"' "+checkedStr+"> \
-                            <span class='lever'></span> \
-                            On \
-                            </label> \
-                        </div></a> \
-                        </li>";  
-                    break;
-                // Ventanas  
-                case 1:                   
+                                <img src='images/lightbulb.png' alt='' class='circle'> \
+                                <span class='title'>"+list[i].name+"</span> \
+                                <p>"+list[i].description+"<br> \
+                                </p> \
+                                <a href='#!' class='secondary-content'> <div class='switch'> \
+                                <label> \
+                                Off \
+                                <input type='checkbox' id='dev_"+list[i].id+"' "+checkedStr+"> \
+                                <span class='lever'></span> \
+                                On \
+                                </label> \
+                            </div></a> \
+                            </li>";  
+                    break;  
+                case 1: // Ventana                    
                     items+="<li class='collection-item avatar'> \
-                            <img src='images/window.png' alt='' class='circle'> \
-                            <span class='title'>"+list[i].name+"</span> \
-                            <p>"+list[i].description+"<br> \
-                            </p> \
-                            <a href='#!' class='secondary-content'> <div class='switch'> \
-                            <label> \
-                            Off \
-                            <input type='checkbox' id='dev_"+list[i].id+"' "+checkedStr+"> \
-                            <span class='lever'></span> \
-                            On \
-                            </label> \
-                        </div></a> \
-                        </li>";  
-                    break;                                                          
+                                <img src='images/window.png' alt='' class='circle'> \
+                                <span class='title'>"+list[i].name+"</span> \
+                                <p>"+list[i].description+"<br> \
+                                </p> \
+                                <a href='#!' class='secondary-content'> <div class='switch'> \
+                                <label> \
+                                Off \
+                                <input type='checkbox' id='dev_"+list[i].id+"' "+checkedStr+"> \
+                                <span class='lever'></span> \
+                                On \
+                                </label> \
+                            </div></a> \
+                            </li>";  
+                    break;                                                         
             }
         }
 
